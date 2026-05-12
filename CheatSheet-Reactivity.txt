@@ -130,41 +130,52 @@ client> npm install @mui/icons-material
 
 
 /**********************************/
-STEP_: 
+STEP_10: ENABLE LINKED EDITING 
 *********************************/
-
+-In VS Code, go to Setting.
+-Search for "link" and check box for "Controls whether the editor has linked editing enabled...".
 
 
 
 
 /**********************************/
-STEP_: 
+STEP_11: ADDING  HTTPS Client Side
 *********************************/
-
+-https://github.com/filosottile/mkcert
+-client> npm install -D vite-plugin-mkcert
 
 
 /**********************************/
-STEP_: 
+STEP_12: GET TRUSTED CERT
 *********************************/
-
+Reactive> dotnet dev-certs https --clean
+Reactive> dotnet dev-certs https --trust
 
 
 /**********************************/
-STEP_: 
+STEP_13: ADDING AXIOS
 *********************************/
-
+-axios-http.com
+-client> npm install axios
 
 
 /**********************************/
-STEP_: 
+STEP_14: ADD NUGET "MEDIATR"
 *********************************/
-
+-In Nuget, search for "Mediatr".
+-https://www.nuget.org/packages/mediatr/13.10#readme-body-tab
+-https://mediatr.io/#pricing
+-Select Community Free License
+-For training purposes, select 12.4.1 in the Application.csproj.
+	The latest version required a FREE Community License.
 
 
 /**********************************/
-STEP_: 
+STEP_15: ADD AUTOMAPPER EXTENSION
 *********************************/
-
+Nugget
+Search for "automapper"
+Late version no longer free. Select free version 13.0.1.
 
 
 /**********************************/

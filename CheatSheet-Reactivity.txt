@@ -193,8 +193,10 @@ npm i @tanstack/react-query-devtools
 
 
 /**********************************/
-STEP_18: 
+STEP_18: ADD REACT ROUTER
 *********************************/
+http://reactrouter.com/
+client> npm i react-router
 
 
 

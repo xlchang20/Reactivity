@@ -1,67 +1,68 @@
-import { useEffect, useState } from 'react'
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-import { Box, Container, CssBaseline } from '@mui/material';
-import axios from "axios"
-import NavBar from './NavBar';
-import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
+import { useState } from "react"
+import { Box, Container, CssBaseline, Typography } from '@mui/material';
+import NavBar from "./NavBar";
+import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard";
+import { useActivities } from "../../lib/types/hooks/useActivities";
+
 
 function App() {
-
-  const [activities, setActivities] = useState<Activity[]>([]);
-  const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined);
+  const [selectedActivity, setSelectedActivity] 
+    = useState<Activity | undefined>(undefined);
   const [editMode, SetEditMode] = useState(false);
-
-  useEffect(() => {
-    axios.get<Activity[]>('https://localhost:5001/api/activities')
-      .then(response => setActivities(response.data))
-    return () => {}
-  }, [])
+  const {activities, isPending, error} = useActivities();
 
   const handleSelectActivity = (id: string) => {
-    setSelectedActivity(activities.find(x => x.id === id));
-  }
+    setSelectedActivity(activities?.find((x: Activity) => x.id === id));
+  };
 
   const handleCancelSelectActivity = () => {
     setSelectedActivity(undefined);
-  }
+  };
 
   const handleOpenForm = (id?: string) => {
     if (id) handleSelectActivity(id);
     else handleCancelSelectActivity();
     SetEditMode(true);
-  }
+  };
 
   const handleFormClose = () => {
     SetEditMode(false);
-  }
+  };
 
-  const handleDelete = (id: string) => {
-    setActivities(activities.filter(x => x.id !== id))
-  }
+  if (isPending) return <Typography>Load Application....</Typography>
+
+  if (error) return <Typography>Error loading activities.</Typography>
 
   return (
-    <Box sx={{bgcolor: '#eeeeee'}}>
+    
+    <Box sx={{bgcolor: '#eeeeee', minHeight: '100vh'}}>
       <CssBaseline />
 
       <NavBar openForm={handleOpenForm} />
 
       <Container maxWidth='xl' sx={{mt: 3}}>
-        <ActivityDashboard
-          activities={activities}
-          selectActivity={handleSelectActivity}
-          cancelSelectActivity ={handleCancelSelectActivity}
-          selectedActivity={selectedActivity}
-          editMode={editMode}
-          openForm={handleOpenForm}
-          closeForm={handleFormClose}
-          deleteActivity={handleDelete}
+        {!activities && isPending && error ? (
+          <Typography>Loading Application....</Typography>
+        ) : (
+          <ActivityDashboard
+            activities={activities ?? []}
+            selectActivity={handleSelectActivity}
+            cancelSelectActivity ={handleCancelSelectActivity}
+            selectedActivity={selectedActivity}
+            editMode={editMode}
+            openForm={handleOpenForm}
+            closeForm={handleFormClose}
           />
+        )}
       </Container>
     </Box>
   )
 }
 
 export default App
+//  function useQuery(
+//   arg0: { queryKey: string[]; 
+//   queryFn: () => Promise<Activity[]>; }): { data: any; } 
+// {
+//   throw new Error('Function not implemented. XC_App.tsx');
+// }

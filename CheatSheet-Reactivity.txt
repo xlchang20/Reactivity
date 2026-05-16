@@ -4,7 +4,7 @@
 
 
 
-
+https://github.com/trycatchlearn/reactivities
 
 /**********************************/
 STEP_1: RUN APP
@@ -185,9 +185,11 @@ STEP_16: MATERIAL UI
 
 
 /**********************************/
-STEP_17: 
+STEP_17: REACTION DOCUMENTATION
 *********************************/
-
+https://tanstack.com/query/v5/docs/framework/react/overview
+Reactivity> npm i @tanstack/react-query
+npm i @tanstack/react-query-devtools
 
 
 /**********************************/
